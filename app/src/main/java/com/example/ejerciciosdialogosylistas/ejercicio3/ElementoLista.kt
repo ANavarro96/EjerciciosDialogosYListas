@@ -15,6 +15,7 @@ import androidx.compose.runtime.mutableFloatStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun ElementoListaSlider(){
@@ -30,4 +31,10 @@ fun ElementoListaSlider(){
             Icon(Icons.Outlined.Done, contentDescription = null)
         }
     }
+}
+
+@Preview(showSystemUi = true, showBackground = true)
+@Composable
+fun PreviewElementoList(){
+    ElementoListaSlider()
 }

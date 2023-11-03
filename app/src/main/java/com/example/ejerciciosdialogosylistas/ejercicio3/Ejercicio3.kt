@@ -32,12 +32,3 @@ fun DetalleEjercicio3(multiplicador : Float){
     }
 }
 
-/*
- * Funcion que devuelve un Color generado al azar.
- */
-fun ColorRandom(): Color {
-    val r = Random.nextInt(256)
-    val g = Random.nextInt(256)
-    val b = Random.nextInt(256)
-    return Color(r, g, b)
-}
