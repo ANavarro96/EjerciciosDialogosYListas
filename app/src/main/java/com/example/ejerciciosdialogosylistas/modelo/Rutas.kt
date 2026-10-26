@@ -1,9 +1,21 @@
 package com.example.ejerciciosdialogosylistas.modelo
 
-sealed class Rutas(val ruta: String){
-    object EjercicioDialogo : Rutas("dialogo")
-    object MainMenu : Rutas("menu")
-    object EjercicioLista : Rutas("listas")
-    object EjercicioDropDown : Rutas("drop")
-    object DetalleLista : Rutas("detalle")
+import androidx.navigation3.runtime.NavKey
+import kotlinx.serialization.Serializable
+
+sealed interface Rutas : NavKey {
+    @Serializable
+    data object EjercicioDialogo : Rutas
+
+    @Serializable
+    data object MainMenu : Rutas
+
+    @Serializable
+    data object EjercicioLista : Rutas
+
+    @Serializable
+    data object EjercicioDropDown : Rutas
+
+    @Serializable
+    data class DetalleLista(val multiplicador: Float) : Rutas
 }

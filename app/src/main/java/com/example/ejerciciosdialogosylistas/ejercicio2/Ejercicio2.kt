@@ -41,5 +41,3 @@ fun BotonConfirmar(){
         Text("Cambiar Color")
     }
 }
-
-

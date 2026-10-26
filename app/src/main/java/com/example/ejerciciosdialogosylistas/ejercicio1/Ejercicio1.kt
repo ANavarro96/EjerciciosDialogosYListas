@@ -4,9 +4,12 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.input.rememberTextFieldState
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuAnchorType.Companion.PrimaryNotEditable
 import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.MenuAnchorType
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -18,8 +21,10 @@ import com.example.ejerciciosdialogosylistas.R
 fun PantallaEjercicio1(){
 
     val listaOpciones = arrayListOf("Hasbulla", "La pulga", "El bicho" , "pablo motos")
+    val textFieldState = rememberTextFieldState()
 
     Column(){
+
         ExposedDropdownMenuBox(
             modifier = Modifier.fillMaxWidth()
             ,expanded = false /*TODO: Declarar una variable de estado que gestione la expansion*/
@@ -27,10 +32,12 @@ fun PantallaEjercicio1(){
 
 
             // TODO: Gestionar los eventos, añadir un icono, titulo y placeholder.
-            TextField(value = "",
-                onValueChange = {},
+            TextField(
+                state = textFieldState,
                 readOnly = true,
-                modifier = Modifier.fillMaxWidth().menuAnchor()
+                modifier = Modifier.fillMaxWidth()
+                    .menuAnchor(
+                        PrimaryNotEditable, enabled = true)
             )
 
             DropdownMenu(expanded = false /*TODO*/  , onDismissRequest = { /*TODO*/ }) {
@@ -45,7 +52,5 @@ fun PantallaEjercicio1(){
             modifier = Modifier.fillMaxSize())
 
     }
-
-
 
 }

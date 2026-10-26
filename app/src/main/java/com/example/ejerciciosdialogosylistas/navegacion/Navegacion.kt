@@ -1,9 +1,10 @@
 package com.example.ejerciciosdialogosylistas.navegacion
 
 import androidx.compose.runtime.Composable
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
+import androidx.compose.ui.unit.dp
+import androidx.navigation3.runtime.entryProvider
+import androidx.navigation3.runtime.rememberNavBackStack
+import androidx.navigation3.ui.NavDisplay
 import com.example.ejerciciosdialogosylistas.ejercicio1.PantallaEjercicio1
 import com.example.ejerciciosdialogosylistas.ejercicio2.PantallaEjercicio2
 import com.example.ejerciciosdialogosylistas.ejercicio3.DetalleEjercicio3
@@ -12,33 +13,39 @@ import com.example.ejerciciosdialogosylistas.menu.PantallaMenu
 import com.example.ejerciciosdialogosylistas.modelo.Rutas
 
 @Composable
-fun GrafoNavegacion(){
+fun GrafoNavegacion() {
 
-    val navController = rememberNavController()
+    val backStack = rememberNavBackStack(Rutas.MainMenu)
 
-    NavHost(navController = navController, startDestination = Rutas.MainMenu.ruta){
+    NavDisplay(
+        backStack = backStack,
+        onBack = { backStack.removeLastOrNull() },
+        entryProvider = entryProvider {
 
-        composable(Rutas.MainMenu.ruta){
-            PantallaMenu(navController = navController)
+            entry<Rutas.MainMenu> {
+                PantallaMenu(
+                    onNavigateToEjercicio1 = { backStack.add(Rutas.EjercicioDropDown) },
+                    onNavigateToEjercicio2 = { backStack.add(Rutas.EjercicioDialogo) },
+                    onNavigateToEjercicio3 = { backStack.add(Rutas.EjercicioLista) }
+                )
+            }
+
+            entry<Rutas.EjercicioDropDown> {
+                PantallaEjercicio1()
+            }
+
+            entry<Rutas.EjercicioDialogo> {
+                PantallaEjercicio2()
+            }
+
+            entry<Rutas.EjercicioLista> {
+                PantallaEjercicio3()
+            }
+
+            entry<Rutas.DetalleLista> {
+                /* TODO: Tenemos que gestionar la navegación aquí */
+                DetalleEjercicio3(multiplicador = 1.0f)
+            }
         }
-
-        composable(Rutas.EjercicioDropDown.ruta){
-            PantallaEjercicio1()
-        }
-
-        composable(Rutas.EjercicioDialogo.ruta){
-            PantallaEjercicio2()
-        }
-
-        composable(Rutas.EjercicioLista.ruta){
-            PantallaEjercicio3()
-        }
-
-        composable(Rutas.DetalleLista.ruta + "/{multiplicador}"){
-            DetalleEjercicio3(multiplicador = it.arguments!!.getString("multiplicador")!!.toFloat())
-        }
-
-
-    }
-
+    )
 }

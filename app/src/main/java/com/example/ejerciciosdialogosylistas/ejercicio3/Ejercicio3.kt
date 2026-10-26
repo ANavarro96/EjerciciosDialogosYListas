@@ -8,9 +8,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.sp
-import kotlin.random.Random
 
 @Composable
 fun PantallaEjercicio3() {
@@ -31,4 +29,3 @@ fun DetalleEjercicio3(multiplicador : Float){
         Text(text = "Hola, soy un texto aqui bien tranquilote", fontSize = 200.sp * multiplicador)
     }
 }
-
