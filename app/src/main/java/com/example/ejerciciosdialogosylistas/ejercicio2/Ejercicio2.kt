@@ -11,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.ejerciciosdialogosylistas.utils.FuncionesUtiles
 
 @Composable
 fun PantallaEjercicio2(){

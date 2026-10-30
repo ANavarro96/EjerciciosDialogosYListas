@@ -17,5 +17,8 @@ sealed interface Rutas : NavKey {
     data object EjercicioDropDown : Rutas
 
     @Serializable
+    data object EjercicioSearch : Rutas
+
+    @Serializable
     data class DetalleLista(val multiplicador: Float) : Rutas
 }

@@ -13,7 +13,8 @@ import androidx.compose.ui.Modifier
 fun PantallaMenu(
     onNavigateToEjercicio1: () -> Unit,
     onNavigateToEjercicio2: () -> Unit,
-    onNavigateToEjercicio3: () -> Unit
+    onNavigateToEjercicio3: () -> Unit,
+    onNavigateToEjercicio4: () -> Unit
 ) {
     Column(
         Modifier.fillMaxSize(),
@@ -23,6 +24,7 @@ fun PantallaMenu(
         BotonMenu(texto = "Ejercicio 1", funcion = onNavigateToEjercicio1)
         BotonMenu(texto = "Ejercicio 2", funcion = onNavigateToEjercicio2)
         BotonMenu(texto = "Ejercicio 3", funcion = onNavigateToEjercicio3)
+        BotonMenu(texto = "Ejercicio 4", funcion = onNavigateToEjercicio4)
     }
 }
 
