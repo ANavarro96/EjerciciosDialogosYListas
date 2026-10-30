@@ -48,7 +48,7 @@ fun PantallaEjercicio4() {
         /* TODO: Usar textFieldState y searchBarState para la gestión de búsqueda y expansión */
 
         // TODO: Implementar la SearchBar con su SearchBarDefaults.InputField e icono de búsqueda.
-        SearchBar(
+        /*SearchBar(
             state = /* TODO*/,
             inputField = {
                 SearchBarDefaults.InputField(
@@ -99,6 +99,6 @@ fun PantallaEjercicio4() {
             /* TODO: Mostrar los elementos de listaNombres filtrados usando el composable Text */
 
 
-        }
+        }*/
     }
 }
