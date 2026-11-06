@@ -16,9 +16,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.ejerciciosdialogosylistas.modelo.Rutas
 
 @Composable
-fun ElementoListaSlider(){
+fun ElementoListaSlider(onSliderPulsado: (Float) -> Unit){
     Row(
         Modifier
             .fillMaxWidth()
@@ -27,7 +28,8 @@ fun ElementoListaSlider(){
         Slider(value = valorSlider,
             onValueChange = { valorSlider = it},
             modifier = Modifier.weight(1f))
-        IconButton(onClick = { /*TODO: Navegar hacia DetalleEjercicio3, pasando el valor del Slider*/ }) {
+        IconButton(onClick = {
+            onSliderPulsado(valorSlider) }) {
             Icon(Icons.Outlined.Done, contentDescription = null)
         }
     }
@@ -36,5 +38,5 @@ fun ElementoListaSlider(){
 @Preview(showSystemUi = true, showBackground = true)
 @Composable
 fun PreviewElementoList(){
-    ElementoListaSlider()
+    ElementoListaSlider({})
 }

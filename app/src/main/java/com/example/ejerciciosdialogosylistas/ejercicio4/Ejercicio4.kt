@@ -4,7 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.input.rememberTextFieldState
@@ -36,26 +38,35 @@ fun PantallaEjercicio4() {
     /* Esta lista es inmutable */
     val listaNombres = listOf(
         "El Xokas", "Jordi Wild", "Ibai Llanos", "Rubius", "WillyRex",
-        "Zazza el italiano", "Filthy Frank"
+        "Zazza el italiano", "Filthy Frank", "ZelenDust", "Sasel Landia",
+        "8", "Mr Jagger", "Señor Bestia", "Asmongold", "XQC"
     )
 
     /* TODO: ¿Por qué hay que crear esto? */
-    val listaMutable = remember { mutableStateListOf<String>().apply { addAll(listaNombres) } }
+    val listaMutable =
+        remember { mutableStateListOf<String>().apply { addAll(listaNombres) } }
 
+    var buscado by remember { mutableStateOf("") }
     val scope = rememberCoroutineScope() // Similar a un Thread en java
 
     Column(modifier = Modifier.fillMaxSize()) {
         /* TODO: Usar textFieldState y searchBarState para la gestión de búsqueda y expansión */
-
+        var estadoBarra = rememberSearchBarState()
+        var estadoTexto = rememberTextFieldState()
         // TODO: Implementar la SearchBar con su SearchBarDefaults.InputField e icono de búsqueda.
-        /*SearchBar(
-            state = /* TODO*/,
+       SearchBar(
+            state = estadoBarra,
             inputField = {
                 SearchBarDefaults.InputField(
-                    textFieldState = /* TODO*/,
-                    searchBarState = /* TODO*/,
+                    textFieldState = estadoTexto,
+                    searchBarState = estadoBarra,
                     onSearch = {
-                       },
+                        buscado = estadoTexto.text.toString()
+                        scope.launch {
+                            estadoBarra.animateToCollapsed()
+                        }
+
+                    },
                     placeholder = { Text("Buscar...") },
                     leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") }
                 )
@@ -66,12 +77,18 @@ fun PantallaEjercicio4() {
         )
 
         ExpandedFullScreenSearchBar(
-            state = /* TODO*/,
+            state = estadoBarra,
             inputField = {
                 SearchBarDefaults.InputField(
-                    textFieldState = /* TODO*/,
-                    searchBarState = /* TODO*/,
-                    onSearch = {},
+                    textFieldState = estadoTexto,
+                    searchBarState = estadoBarra,
+                    onSearch = {
+                        buscado = estadoTexto.text.toString()
+                        scope.launch {
+                            estadoBarra.animateToCollapsed()
+                        }
+
+                    },
                     placeholder = { Text("Buscar...") },
                     leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Buscar") }
                 )
@@ -82,23 +99,40 @@ fun PantallaEjercicio4() {
                     .fillMaxSize()
                     .padding(horizontal = 16.dp)
             ) {
-                /* TODO: Mostrar los elementos de listaNombres filtrados usando el composable ListItem */
+                items(listaMutable){
+                    if(it.contains(estadoTexto.text, ignoreCase = true)){
+
+                        ListItem(headlineContent = {Text(it)}
+                            , Modifier.clickable{
+                                buscado = it
+                                scope.launch { // run de java
+                                    estadoBarra.animateToCollapsed()
+                                }
+
+                            })
+                    }
+
+                }
+            /* TODO:
+                Mostrar los elementos de listaNombres filtrados usando el composable ListItem */
 
             }
 
         }
-
-        /* TODO: Filtrar la listaNombres basándose en el texto introducido */
 
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
                 .padding(horizontal = 16.dp)
         ) {
-
-            /* TODO: Mostrar los elementos de listaNombres filtrados usando el composable Text */
-
-
-        }*/
+            //
+           items(listaMutable){ youtuber ->
+               // si el youtuber es el seleccionado...
+               // if seleccionado, if youtuber == seleccionado
+               if(youtuber.contains(buscado)) {
+                   Text(youtuber, modifier = Modifier.size(150.dp))
+               }
+           }
+        }
     }
 }

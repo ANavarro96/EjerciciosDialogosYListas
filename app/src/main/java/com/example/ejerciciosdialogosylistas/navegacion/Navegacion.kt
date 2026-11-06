@@ -40,7 +40,11 @@ fun GrafoNavegacion() {
             }
 
             entry<Rutas.EjercicioLista> {
-                PantallaEjercicio3()
+                PantallaEjercicio3(
+                    {
+                       valorRecibidoHijo -> // variable del hijo
+                    backStack.add(Rutas.DetalleLista(valorRecibidoHijo))
+                })
             }
 
             entry<Rutas.EjercicioSearch> {
